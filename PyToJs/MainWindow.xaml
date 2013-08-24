@@ -1,0 +1,44 @@
+﻿<Window x:Class="PyToJs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalon="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
+        Title="Python to JavaScript" Height="350" Width="525" Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock FontSize="14" FontWeight="Bold" Margin="4,4,0,4">Python code</TextBlock>
+        <TextBlock FontSize="14" FontWeight="Bold" Grid.Column="1" Margin="8,4,0,4">JavaScript code</TextBlock>
+        
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="8" HorizontalAlignment="Left" Margin="-4,0,0,0" />
+
+        <avalon:TextEditor x:Name="input" Grid.Row="1" FontFamily="Consolas" FontSize="{Binding Value, ElementName=fontSize}" Margin="0,0,4,0" TextChanged="input_TextChanged" ShowLineNumbers="True" SnapsToDevicePixels="True" />
+        <avalon:TextEditor Grid.Row="1" FontSize="{Binding Value, ElementName=fontSize}" Grid.Column="1" IsReadOnly="True" Name="output" Margin="4,0,0,0" FontFamily="Consolas" ShowLineNumbers="True" SnapsToDevicePixels="True" />
+
+        <GridSplitter Grid.Row="2" Grid.ColumnSpan="2" Height="8" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="-4,0,0,0" />
+        
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#ddd" Margin="0,8,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="4,4,0,4">Error list</TextBlock>
+            <ListBox x:Name="errors" Grid.Row="1" />
+        </Grid>
+            
+        <StackPanel HorizontalAlignment="Right"  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,8,8,8">
+            <TextBlock VerticalAlignment="Center" Text="Font size" HorizontalAlignment="Left" />
+            <Slider x:Name="fontSize" Width="200" Minimum="8" Maximum="64" Value="14" SmallChange="1" TickPlacement="None" TickFrequency="1" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True" IsTabStop="False" Margin="4,0" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Value, ElementName=fontSize}" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>
